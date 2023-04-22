@@ -1,0 +1,17 @@
+= form_with model: [comment.project, comment], \
+            class: 'flex-grow' \
+            "#{comment.errors.any? && ' has-errors'}",
+            data: { \
+              controller: 'reset-form',
+              action: 'turbo:submit-end->reset-form#reset',
+              reset_form_target: 'form' \
+            } do |f|
+  - if comment.errors.any?
+    .error-message data-reset-form-target='errors'
+      = comment.errors.full_messages.to_sentence.capitalize
+  .form__wrapper
+    = f.text_field :text, autofocus: true,
+                          class: 'form__input',
+                          placeholder: 'Type your comment here...'
+    .comment__actions.form__actions
+      = f.submit 'Add comment', class: 'btn btn--secondary h-max'

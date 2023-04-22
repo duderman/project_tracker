@@ -1,0 +1,14 @@
+= turbo_stream_from(:projects)
+
+main.container
+  = link_to sanitize('← Back to projects'), projects_path
+  = turbo_frame_tag "#{dom_id(@project)}_header" do
+    = render partial: 'projects/project_header', locals: { project: @project }
+
+  h2.my-3
+    | Project history
+  = turbo_frame_tag 'new_comment' do
+    = render partial: 'comments/form',
+            locals: { comment: @comment }
+  #project-history
+    = render @project.history_entries

@@ -1,0 +1,12 @@
+.project.list-item id="#{dom_id(project)}_container"
+  = turbo_frame_tag dom_id(project), class: 'flex flex-grow justify-between'
+    .project__details
+      .project__name
+        = link_to project.name, project_path(project), data: { turbo: false }
+      = render partial: 'projects/project_status', locals: { project: }
+    .project__actions.form__actions
+      = link_to 'Edit', edit_project_path(project),
+                class: 'btn btn--small btn--secondary',
+                data: { 'turbo-frame': dom_id(project) }
+      = button_to 'Delete', project_path(project),
+                  method: :delete, class: 'btn btn--small btn--red'

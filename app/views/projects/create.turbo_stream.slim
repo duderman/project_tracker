@@ -1,0 +1,4 @@
+= turbo_stream.prepend 'projects-list'
+  = render @project
+= turbo_stream.replace 'new_project'
+  = turbo_frame_tag 'new_project'

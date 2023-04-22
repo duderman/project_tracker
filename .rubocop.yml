@@ -9,3 +9,18 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+RSpec/MultipleExpectations:
+  Max: 5
+  Exclude:
+    - spec/system/**/*_spec.rb
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/system/**/*_spec.rb

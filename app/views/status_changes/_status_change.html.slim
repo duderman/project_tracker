@@ -1,0 +1,11 @@
+.status-change.list-item id=dom_id(status_change)
+  = render partial: 'project_history_items/created_at',
+           locals: { project_history_item: status_change }
+  .status-change__text.project-history-item__details
+    span
+      | Status changed from&nbsp;
+    span class="project__status project__status--#{status_change.from}"
+      = status_change.from.titleize
+    | &nbsp;to&nbsp;
+    span class="project__status project__status--#{status_change.to}"
+      = status_change.to.titleize

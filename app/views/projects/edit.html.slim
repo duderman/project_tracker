@@ -1,0 +1,7 @@
+main.container
+  = link_to sanitize('← Back to projects'), projects_path, class: 'nav-link'
+  .header
+    h1
+      | Edit Project
+  = turbo_frame_tag dom_id(@project)
+    = render 'form', project: @project

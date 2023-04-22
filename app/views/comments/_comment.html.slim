@@ -1,0 +1,5 @@
+.comment.list-item id=dom_id(comment)
+  = render partial: 'project_history_items/created_at',
+           locals: { project_history_item: comment }
+  .comment__text.project-history-item__details.italic
+    = comment.text

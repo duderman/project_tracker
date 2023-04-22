@@ -1,0 +1,8 @@
+main.container
+  = link_to sanitize('&larr; Back to projects'), projects_path
+
+  .header
+    h1 New Project
+
+  = turbo_frame_tag 'new_project'
+    = render 'form', project: @project

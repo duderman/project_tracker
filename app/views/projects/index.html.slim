@@ -1,0 +1,11 @@
+= turbo_stream_from(:projects)
+
+main.container
+  .header.flex
+    h1.flex-grow Projects
+    = link_to 'New Project', new_project_path,
+              class: 'btn btn--primary', data: { 'turbo-frame': 'new_project' }
+
+  = turbo_frame_tag 'new_project'
+  #projects-list
+    = render @projects

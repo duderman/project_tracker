@@ -3,3 +3,24 @@
 detectors:
   IrresponsibleModule:
     enabled: false
+  DuplicateMethodCall:
+    exclude:
+      - ProjectsController#create
+      - CommentsController#create
+      - ProjectHistoryEntry#self.jsonb_accessors
+  TooManyStatements:
+    max_statements: 20
+  UtilityFunction:
+    exclude:
+      - ProjectsHelper#human_project_status
+  NestedIterators:
+    exclude:
+      - ProjectHistoryEntry#self.jsonb_accessors
+
+exclude_paths:
+  - db
+
+directories:
+  "app/controllers":
+    InstanceVariableAssumption:
+      enabled: false

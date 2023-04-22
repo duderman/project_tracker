@@ -1,0 +1,10 @@
+= form_with model: project, class: 'flex-grow' do |f|
+  - if project.errors.any?
+    .error-message
+      = project.errors.full_messages.to_sentence.capitalize
+  .form__wrapper
+    = f.text_field :name, autofocus: true, class: 'form__input',
+                          placeholder: 'Project name'
+    .project__actions.form__actions
+      = f.submit class: 'btn btn--secondary btn--small'
+      = link_to 'Cancel', projects_path, class: 'btn btn--secondary btn--small'

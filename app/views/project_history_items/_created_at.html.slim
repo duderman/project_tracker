@@ -1,0 +1,6 @@
+.project-history-item__created-at class="\
+  text-center border-r-2 border-gray-700 pr-2 whitespace-nowrap my-auto"
+  .project-history-item__date
+    = project_history_item.created_at.strftime('%d-%m-%Y')
+  .project-history-item__time
+    = project_history_item.created_at.strftime('%H:%M:%S')

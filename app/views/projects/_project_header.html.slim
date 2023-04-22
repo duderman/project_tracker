@@ -1,0 +1,12 @@
+.project__header.my-2 id="#{dom_id(project)}_header_container"
+  h1.flex.flex-row
+    span.my-auto
+      = project.name
+    = render partial: 'projects/project_status', locals: { project: }
+    span.my-auto
+      - if project.may_transition?
+        = button_to "#{project.next_transition}?",
+                    next_transition_project_path(project),
+                    method: :put,
+                    class: 'project__transition-link',
+                    data: { 'turbo-frame': "#{dom_id(project)}_header" }

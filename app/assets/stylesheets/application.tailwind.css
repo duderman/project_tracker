@@ -2,12 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+@layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  h2 {
+    @apply text-xl font-bold;
   }
 }
 
-*/
+.header {
+  @apply my-4 justify-between;
+}
+
+.btn {
+  @apply text-center text-white font-bold my-1 py-2 px-4 rounded text-lg;
+}
+
+.btn--primary {
+  @apply bg-green-500 hover:bg-green-700;
+}
+
+.btn--secondary {
+  @apply bg-blue-500 hover:bg-blue-700;
+}
+
+.btn--red {
+  @apply bg-red-500 hover:bg-red-700;
+}
+
+.btn--small {
+  @apply py-1 px-2 text-base;
+}
+
+.list-item {
+  @apply bg-pink-100 shadow-md rounded-lg overflow-hidden my-4 p-4 flex;
+}
+
+.project__details {
+  @apply flex my-auto;
+}
+
+.project__name {
+  @apply text-lg font-bold my-auto;
+}
+
+.project__status {
+  @apply p-1 border-2 rounded-lg uppercase;
+}
+
+.project-history-item__details .project__status {
+  @apply text-xs;
+}
+
+.project__status--todo {
+  @apply border-gray-700 text-gray-700;
+}
+
+.project__status--in_progress {
+  @apply border-yellow-700 text-yellow-700;
+}
+
+.project__status--completed {
+  @apply border-green-700 text-green-700;
+}
+
+.form__actions {
+  @apply flex flex-col justify-center;
+}
+
+.project__transition-link {
+  @apply text-center text-blue-600 hover:text-blue-800 ml-2 underline cursor-pointer font-normal capitalize;
+}
+
+.form__wrapper {
+  @apply flex;
+}
+
+.form__input {
+  @apply border-gray-300 rounded-lg p-2 my-2 flex-grow mr-4;
+}
+
+.error-message {
+  @apply text-red-500 text-sm;
+}
+
+.has_errors .form__input {
+  @apply border-red-300 focus:border-red-500 focus:ring-red-500;
+}
+
+.project-history-item__details {
+  @apply ml-3 my-auto;
+}
