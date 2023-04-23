@@ -7,8 +7,14 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
+    env:
+      - DB_PASSWORD: postgres
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -27,6 +33,10 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
       redis:
@@ -34,6 +44,8 @@ jobs:
         ports:
           - 6379:6379
         options: --entrypoint redis-server
+    env:
+      - DB_PASSWORD: postgres
     steps:
       - name: Check out code
         uses: actions/checkout@v3

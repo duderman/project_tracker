@@ -20,7 +20,7 @@ jobs:
           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile rubocop-capybara:gemfile rubocop-slim:gemfile
           reporter: github-pr-review
   reek:
-    name: reek
+    name: Reek
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
