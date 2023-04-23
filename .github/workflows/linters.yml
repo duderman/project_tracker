@@ -1,4 +1,4 @@
-name: ReviewDog
+name: Linters
 on:
   push:
     branches: [main]
