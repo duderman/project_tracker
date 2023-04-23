@@ -25,6 +25,8 @@ jobs:
           bundler-cache: true
       - name: Prepare db
         run: bundle exec rails db:setup
+      - name: Build Tailwind
+        run: bundle exec rails tailwindcss:build
       - name: Run RSpec
         run: bundle exec rspec --tag ~type:system
   system:
@@ -56,5 +58,7 @@ jobs:
           bundler-cache: true
       - name: Prepare db
         run: bundle exec rails db:setup
+      - name: Build Tailwind
+        run: bundle exec rails tailwindcss:build
       - name: Run System tests
         run: bundle exec rspec --tag type:system
