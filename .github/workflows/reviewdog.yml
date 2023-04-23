@@ -1,0 +1,35 @@
+name: ReviewDog
+on: [pull_request]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  rubocop:
+    name: RuboCop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+      - name: RuboCop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile rubocop-capybara:gemfile rubocop-slim:gemfile
+          reporter: github-pr-review
+  reek:
+    name: reek
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+      - name: reek
+        uses: reviewdog/action-reek@v1
+        with:
+          reek_version: gemfile
+          reporter: github-pr-review
