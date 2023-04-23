@@ -202,36 +202,25 @@ RSpec.describe '/projects' do
     let(:project_id) { project.id }
     let(:project) { create(:project, status: 'todo') }
 
+    before { allow(TransitionProjectToNextStatus).to receive(:call) }
+
     it 'redirects to project' do
       request
       expect(response).to redirect_to(project_path(project))
     end
 
-    it 'updates the project' do
+    it 'calls transition service' do
       request
-      expect(project.reload.status).to eq('in_progress')
+      expect(TransitionProjectToNextStatus).to have_received(:call).with(project)
     end
 
-    it 'schedule a job to broadcast a project update' do
-      expect { request }.to have_enqueued_job(BroadcastProjectUpdateJob).with(project)
-    end
-
-    context 'when project can be transitioned' do
-      let(:project) { create(:project, status: 'completed') }
+    context 'when project can not be transitioned' do
+      before { allow(TransitionProjectToNextStatus).to receive(:call).and_raise(Project::NoMoreTransitionsError) }
 
       it 'redirects to project with error' do
         request
         expect(response).to redirect_to(project_path(project))
         expect(flash[:error]).to eq('No more transitions')
-      end
-
-      it 'does not update the project' do
-        request
-        expect(project.reload.status).to eq('completed')
-      end
-
-      it 'does not schedule a job to broadcast a project update' do
-        expect { request }.not_to have_enqueued_job(BroadcastProjectUpdateJob)
       end
     end
 

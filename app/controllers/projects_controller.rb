@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   def next_transition
     TransitionProjectToNextStatus.call(@project)
     redirect_to current_project_path, notice: 'Project was successfully updated.'
-  rescue TransitionProjectToNextStatus::NoMoreTransitionsError
+  rescue Project::NoMoreTransitionsError
     flash[:error] = 'No more transitions'
     redirect_to current_project_path
   end

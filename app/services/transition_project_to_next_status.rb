@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 class TransitionProjectToNextStatus < ApplicationService
-  NoMoreTransitionsError = Class.new(StandardError)
-
   include ActionView::RecordIdentifier
   include ProjectsHelper
-
-  attr_reader :project, :initial_status, :status_change
 
   def initialize(project) # rubocop:disable Lint/MissingSuper
     @project = project
@@ -14,7 +10,6 @@ class TransitionProjectToNextStatus < ApplicationService
   end
 
   def call
-    validate!
     transition!
     schedule_log_broadcast
     schedule_update_broadcast
@@ -22,9 +17,7 @@ class TransitionProjectToNextStatus < ApplicationService
 
   private
 
-  def validate!
-    raise NoMoreTransitionsError unless project.may_transition?
-  end
+  attr_reader :project, :initial_status, :status_change
 
   def transition!
     project.transaction do

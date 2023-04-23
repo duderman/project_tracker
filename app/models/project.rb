@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Project < ApplicationRecord
+  NoMoreTransitionsError = Class.new(StandardError)
+
   has_many :history_entries, -> { order(created_at: :desc) },
            class_name: 'ProjectHistoryEntry',
            dependent: :destroy,
@@ -38,12 +40,14 @@ class Project < ApplicationRecord
   end
 
   def transition_to_next_status!
+    raise NoMoreTransitionsError unless may_transition?
+
     send("#{next_transition}!")
   end
 
   def transition_to_next_status
     transition_to_next_status!
-  rescue StandardError
+  rescue NoMoreTransitionsError
     false
   end
 

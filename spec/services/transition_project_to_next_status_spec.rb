@@ -40,7 +40,7 @@ RSpec.describe TransitionProjectToNextStatus do
       let(:project) { build(:project, :completed) }
 
       it 'throws an exception' do
-        expect { call }.to raise_error(described_class::NoMoreTransitionsError)
+        expect { call }.to raise_error(Project::NoMoreTransitionsError)
       end
     end
   end

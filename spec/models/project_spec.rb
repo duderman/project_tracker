@@ -26,14 +26,14 @@ RSpec.describe Project do
     end
   end
 
-  describe '#transition_to_next_state' do
-    subject(:transition_to_next_state) { project.transition_to_next_state }
+  describe '#transition_to_next_status' do
+    subject(:transition_to_next_status) { project.transition_to_next_status }
 
     context 'when the status is todo' do
       let(:status) { 'todo' }
 
       it 'transitions to in_progress' do
-        expect { transition_to_next_state }.to change(project, :status).from('todo').to('in_progress')
+        expect { transition_to_next_status }.to change(project, :status).from('todo').to('in_progress')
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Project do
       let(:status) { 'in_progress' }
 
       it 'transitions to completed' do
-        expect { transition_to_next_state }.to change(project, :status).from('in_progress').to('completed')
+        expect { transition_to_next_status }.to change(project, :status).from('in_progress').to('completed')
       end
     end
 
@@ -51,7 +51,23 @@ RSpec.describe Project do
       it { is_expected.to be_falsey }
 
       it 'does not transition' do
-        expect { transition_to_next_state }.not_to change(project, :status)
+        expect { transition_to_next_status }.not_to change(project, :status)
+      end
+    end
+  end
+
+  describe '#transition_to_next_status!' do
+    subject(:transition_to_next_status!) { project.transition_to_next_status! }
+
+    it 'transitions to the next status' do
+      expect { transition_to_next_status! }.to change(project, :status).from('todo').to('in_progress')
+    end
+
+    context 'when the status cannot be transitioned' do
+      let(:status) { 'completed' }
+
+      it 'raises an error' do
+        expect { transition_to_next_status! }.to raise_error(described_class::NoMoreTransitionsError)
       end
     end
   end

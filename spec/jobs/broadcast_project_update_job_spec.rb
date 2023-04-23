@@ -12,16 +12,16 @@ RSpec.describe BroadcastProjectUpdateJob do
       perform
     end
 
-    it 'broadcasts the project container' do
+    it 'broadcasts change' do
       expect(project).to have_received(:broadcast_replace_to).with(:projects, target: "project_#{uuid}_container",
                                                                               locals: { project: })
     end
 
     it 'broadcasts the project header' do
       expect(project).to have_received(:broadcast_replace_to).with(
-        :projects, target: "project_#{uuid}_header_container",
-                   locals: { project: },
-                   partial: 'projects/project_header'
+        "channel_project_#{uuid}", target: "project_#{uuid}_header_container",
+                                   locals: { project: },
+                                   partial: 'projects/project_header'
       )
     end
   end
