@@ -1,4 +1,4 @@
-# ProjectTracker [![Linters](https://github.com/duderman/project_tracker/actions/workflows/linters.yml/badge.svg)](https://github.com/duderman/project_tracker/actions/workflows/linters.yml) [![Tests](https://github.com/duderman/project_tracker/actions/workflows/tests.yml/badge.svg)](https://github.com/duderman/project_tracker/actions/workflows/tests.yml)
+# ProjectTracker [![Linters](https://github.com/duderman/project_tracker/actions/workflows/linters.yml/badge.svg)](https://github.com/duderman/project_tracker/actions/workflows/linters.yml) [![Tests](https://github.com/duderman/project_tracker/actions/workflows/tests.yml/badge.svg)](https://github.com/duderman/project_tracker/actions/workflows/tests.yml) [![CodeQL](https://github.com/duderman/project_tracker/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/duderman/project_tracker/actions/workflows/github-code-scanning/codeql)
 
 
 Small MVP of project tracking web app
