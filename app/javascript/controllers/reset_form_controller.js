@@ -6,7 +6,8 @@ export default class extends Controller {
   reset() {
     if (!event.detail.success) return;
 
-    this.errorsTarget.innerHTML = '';
+    if (this.hasErrorsTarget) this.errorsTarget.innerHTML = '';
+
     this.formTarget.classList.remove('has-errors');
     this.formTarget.reset();
   }

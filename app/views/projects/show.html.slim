@@ -1,4 +1,4 @@
-= turbo_stream_from(:projects)
+= turbo_stream_from(project_channel_id(@project))
 
 main.container
   = link_to sanitize('← Back to projects'), projects_path
