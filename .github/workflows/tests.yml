@@ -7,10 +7,6 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
         ports:
           - 5432:5432
     steps:
@@ -31,10 +27,6 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
         ports:
           - 5432:5432
       redis:
