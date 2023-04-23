@@ -1,0 +1,67 @@
+name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    env:
+      DB_PASSWORD: postgres
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Prepare db
+        run: bundle exec rails db:setup
+      - name: Build Tailwind
+        run: bundle exec rails tailwindcss:build
+      - name: Run RSpec
+        run: bundle exec rspec --tag ~type:system
+  system:
+    name: System tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+    env:
+      DB_PASSWORD: postgres
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Prepare db
+        run: bundle exec rails db:setup
+      - name: Build Tailwind
+        run: bundle exec rails tailwindcss:build
+      - name: Run System tests
+        run: bundle exec rspec --tag type:system
