@@ -50,6 +50,7 @@ bundle exec rspec
 * Add rack-attack
 * FE validations
 * Sorting
+* Code coverage, code climate, dependencies tracking etc
 
 ## Questions
 
