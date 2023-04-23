@@ -37,8 +37,14 @@ class Project < ApplicationRecord
     end
   end
 
-  def transition_to_next_state
-    may_transition? && send("#{next_transition}!")
+  def transition_to_next_status!
+    send("#{next_transition}!")
+  end
+
+  def transition_to_next_status
+    transition_to_next_status!
+  rescue StandardError
+    false
   end
 
   def may_transition?

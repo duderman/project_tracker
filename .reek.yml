@@ -16,6 +16,9 @@ detectors:
   NestedIterators:
     exclude:
       - ProjectHistoryEntry#self.jsonb_accessors
+  MissingSafeMethod:
+    exclude:
+      - TransitionProjectToNextStatus
 
 exclude_paths:
   - db

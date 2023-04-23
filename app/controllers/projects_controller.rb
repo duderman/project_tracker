@@ -50,13 +50,11 @@ class ProjectsController < ApplicationController
   end
 
   def next_transition
-    if @project.transition_to_next_state
-      BroadcastProjectUpdateJob.perform_later(@project)
-      redirect_to current_project_path, notice: 'Project was successfully updated.'
-    else
-      flash[:error] = 'No more transitions'
-      redirect_to current_project_path
-    end
+    TransitionProjectToNextStatus.call(@project)
+    redirect_to current_project_path, notice: 'Project was successfully updated.'
+  rescue TransitionProjectToNextStatus::NoMoreTransitionsError
+    flash[:error] = 'No more transitions'
+    redirect_to current_project_path
   end
 
   private
